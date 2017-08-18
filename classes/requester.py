@@ -105,7 +105,7 @@ class JSON_Requester():
             proxy = login[2].replace('\n', '')
         
         
-        proxy_url = user +":" + password + proxy
+        proxy_url = user +":" + password + '@' + proxy
         proxies = {
                     "https":"https://" + proxy_url,
                     "http":"http://" + proxy_url,

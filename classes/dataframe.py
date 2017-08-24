@@ -1,6 +1,3 @@
-import pickle
-import pprint
-
 import os
 import pandas as pd
 
@@ -32,7 +29,7 @@ class DataFrame():
                      'departureTime', 'arrivalDate', 'arrivalTime', 'aircraft',
                      'cabin', 'meal', 'duration', 'mileage',
                      'connectionDuration', 'originTerminal',
-                     'destinationTerminal', 'bookingCode', 'bookingCodeCount'                     
+                     'destinationTerminal', 'bookingCode', 'bookingCodeCount'
                      ]
         overall_order = ['Date', 'Orig', 'Dest', 'booking', 'saleTotal',
                          'baseFareTotal', 'saleFareTotal', 'saleTaxTotal',
@@ -103,10 +100,3 @@ class DataFrame():
                     return file
         else:
             return file
-
-if __name__ == '__main__':
-    with open('trip_data.p', 'rb') as f:
-        trip_data = pickle.load(f)
-        
-    df = DataFrame()
-    df.add_trip_to_dataframe(trip_data)

@@ -1,4 +1,3 @@
-# !python3
 import os
 import pandas as pd
 
@@ -91,21 +90,3 @@ class Basket_Proffer():
 
     def to_csv(self, df):
         df.to_csv(self.path + '\\flight_basket\\basket.csv', index=False)
-
-if __name__ == '__main__':
-
-    dates = {
-                 'date': '2017-07-21',
-                 'eight_weeks': {
-                                 'depart': '2017-09-13',
-                                 'dom_return': '2017-09-20',
-                                 'intl_return': '2017-09-27'
-                                 },
-                 'four_weeks': {
-                                 'depart': '2017-08-16',
-                                 'dom_return': '2017-08-23',
-                                 'intl_return': '2017-08-30'},
-                 'time': '09:16:18'
-                }
-    bp = Basket_Proffer(dates)
-    

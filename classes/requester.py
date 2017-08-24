@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import time
 
 
 class JSON_Requester():
@@ -56,7 +57,7 @@ class JSON_Requester():
             os.mkdir(self.path + '\\json\\')
         if not os.path.isdir(self.path + '\\json\\' + self.today):
             os.mkdir(self.path + '\\json\\' + self.today)
-            
+
     def save_json_file(self, r):
         json_data = json.loads(r.text)
         file_path = (self.path + '\\json\\' + self.today + '\\')
@@ -71,7 +72,7 @@ class JSON_Requester():
         file_path = (self.path + '\\error_logs\\')
         if not os.path.isdir(file_path):
             os.mkdir(file_path)
-        
+
         # Status Code Error Logging
         if status_code_error:
             file_name = file_path + self.today + '_response_error_code.txt'
@@ -99,21 +100,23 @@ class JSON_Requester():
 
     def send_request(self, url, payload):
         with open('.\\files\\requests_info\\proxy_login.txt', 'r') as f:
-            login =  list(iter(f))
+            login = list(iter(f))
             user = login[0].replace('\n', '')
             password = login[1].replace('\n', '')
             proxy = login[2].replace('\n', '')
-        
-        
-        proxy_url = user +":" + password + '@' + proxy
+
+        proxy_url = user + ":" + password + proxy
         proxies = {
-                    "https":"https://" + proxy_url,
-                    "http":"http://" + proxy_url,
+                    "https": "https://" + proxy_url,
+                    "http": "http://" + proxy_url,
                     }
-        
+        start_time = time.time()
         r = requests.post(url, json=payload, proxies=proxies)
+        end_time = time.time()
+        print('Request Time:'.ljust(40, '.') +
+              str(round((end_time - start_time), 2)))
         if r.status_code == 200:
-            if len(r.text) >= 300: # Less than 300 characters means error JSON
+            if len(r.text) >= 300:  # Less than 300 characters means error JSON
                 self.check_for_json_folders()
                 self.save_json_file(r)
                 data = json.loads(r.text)
@@ -121,16 +124,5 @@ class JSON_Requester():
                 data = self.write_error_log(r, status_code_error=False)
         else:
             data = self.write_error_log(r)
-            
-        return data
 
-if __name__ == '__main__':
-                    
-    sample_dict = {'Dest': 'PEK',
-                   'Orig': 'YYZ',
-                   'booking': '4',
-                   'dep_date': '2017-09-08',
-                   'ret_date': '2017-09-22',
-                   'today': '2017-08-15'}
-    
-    jr = JSON_Requester(sample_dict)
+        return data

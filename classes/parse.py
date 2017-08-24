@@ -1,7 +1,3 @@
-import os
-import json
-
-
 class Parser():
 
     def __init__(self, json_, flight_details):
@@ -9,17 +5,17 @@ class Parser():
         self.trips = []
         flight_details['Date'] = flight_details.pop('today')
         try:
-            trip_generator = (trip for trip in json_['trips']['tripOption'])    
+            trip_generator = (trip for trip in json_['trips']['tripOption'])
 
             def merge_two_dicts(x, y):
                 z = x.copy()
                 z.update(y)
                 return z
-            
+
             for trip in trip_generator:
                 overall_data = self.get_overall_data(trip, flight_details)
                 segment_data = self.get_segment_data(trip)
-                # self.trips.append({**x, **y}) is a better solution should 
+                # self.trips.append({**x, **y}) is a better solution should
                 # Python 3.5+ ever become available
                 self.trips.append(merge_two_dicts(overall_data, segment_data))
 
@@ -224,19 +220,3 @@ class Parser():
         else:
             print('NON-CANADIAN FUNDS ' + price)
             return price
-
-if __name__ == '__main__':
-
-    file_path = ('H://Google-Flights-API//files//json//'
-                 '2017-08-16//2017-08-16-YYC-LCY_4.JSON')
-
-    with open(file_path, 'r') as f:
-        json_ = json.load(f)
-
-    flight_details = {'today': '2017-06-26',
-                      'ret_date': '2017-07-10',
-                      'booking': 4,
-                      'Orig': 'YYZ',
-                      'Dest': 'PEK',
-                      'dep_date': '2017-06-27'}
-    parser = Parser(json_, flight_details)

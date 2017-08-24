@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 
 class Flight_Generator():
@@ -73,10 +72,3 @@ class Flight_Generator():
     def get_generator(self, dict_list):
         generator = (itinerary for itinerary in dict_list)
         return generator
-
-if __name__ == '__main__':
-    os.chdir('C:\\Users\\Bryan\\Anaconda3\\Python Projects\\Stats Canada'
-             '\\Travel\\TDD\\Google')
-    from classes.date_maker.Date_Maker import Date_Maker
-    dates = Date_Maker().get_dates()
-    fg = Flight_Generator(dates)

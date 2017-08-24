@@ -33,13 +33,6 @@ class Google_Flights():
 
     def process(self, flights, df):
         for flight in flights:
-            '''
-            # TODO: Remove this temp, offline,  JSON link
-            fp = ('H:\\Google-Flights-API\\files\\json\\2017-08-15\\'
-                         '2017-08-15-YYZ-PEK_4.JSON')
-            with open(fp, 'r') as f:
-                json_ = json.load(f)
-            '''
 
             json_ = JSON_Requester(flight).json_
             trip_data = Parser(json_, flight).trips

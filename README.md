@@ -1,5 +1,4 @@
 <p align='center'><h1>Google QPX Express API Python Script</h1></p>
-<img src='https://github.com/BStaff1986/Google_Flights_Py2/blob/master/qpx_flowchart.png'><p>
 
 <b>Purpose: </b>The purpose of this program is to acquire, parse, organize, and store flight information offered by Google's QPX Express API.<p>
 
@@ -17,4 +16,6 @@
     </ul>
 </ul><p>
 
-<b>Description: </b>Continue...
+
+<b>Description: </b>
+<p align='center'><img src='https://github.com/BStaff1986/Google_Flights_Py2/blob/master/qpx_flowchart.PNG'></p>

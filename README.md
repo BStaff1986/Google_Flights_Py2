@@ -24,11 +24,21 @@ Before running this program, the user will need to make a few changes:
 
 <h3>Program Description</h3><br>
 <p>
-In the home directory of this project you will find a file titled google_qpx_api.pyw. This script simply runs ./classes/google_flights.py every morning at 8:00 am. Here is a general overview of the work flow of 
+  In the home directory of this project you will find a file titled google_qpx_api.pyw. This script simply runs   ./classes/google_flights.py every morning at 8:00 am. Here is a general overview of the work flow of 
 </p>
 
 
 <p align='center'>
-<img src='https://github.com/BStaff1986/Google_Flights_Py2/blob/master/qpx_flowchart.PNG'><br>
+  <img src='https://github.com/BStaff1986/Google_Flights_Py2/blob/master/qpx_flowchart.PNG'><br>
   <i>An overview of google_flights.py</i>
+</p>
+<p>
+  As seen in the flowchart, the program is divided into 3 phases: setup, process, and export.<br>
+  <h4>Setup Phase</h4><br>
+  In the setup phase, four Python class objects are created to prepare the program: Date_Maker, DataFrame, Basket_Proffer, and Flight_Generator.<br>
+  The <b>Date_Maker</b> object creates a dictionary containing all the dates necessary to fulfill the API requests and label the outputs. The dictionary includes today's date, the departure date for 4-and-8 week advanced bookings, and 7-and-14 day return flight dates.<br>
+  The <b>DataFrame</b> class simply initializes a pandas DataFrame object that will later store all the parsed information received from Google’s API. The class includes methods to add the parsed data to the DataFrame and to export the DataFrame to an Excel file.<br>
+  The <b>Basket_Proffer</b> class ensures that a list of flights to be priced with the Google API exists. It checks for basket.csv, which is a table of airport codes for the origin-destination pairs with their return dates included. If this file does not exist, it will look for flight_basket.xlsx which is a similar table but contains city-names instead of airport codes. If this file also does not exist, an error that ends the program will be raised.
+  <br>
+  Finally, the <b>Flight_Generator</b> class reads in the list of flights(basket.csv) and creates a generator object. The generator object allows for each flight to be handled individually.
 </p>
